@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        //rubik -> font-rubik
+        rubik: ["var(--font-rubik)"]
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
