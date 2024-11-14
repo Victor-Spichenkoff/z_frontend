@@ -2,18 +2,39 @@
 
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { Input }  from "@/components/ui/Input"
-import { Button } from "../ui/Button"
+import { Input } from "@/components/ui/Input"
+import { MyButton } from "../ui/MyButton"
+import { ShowMessage } from "../utils/Message"
+import { useToast } from "@/hooks/use-toast"
+import { makeLogin } from "@/utils/auth"
 
 
 
 export const SignInForm = () => {
     const router = useRouter()
+    // const [errosMessage, setErrorMessage] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const { toast } = useToast()
 
-    const handleEnterButton = () => {
-        router.replace("/")
+    const HandleEnterButton = async () => {
+        try {
+            const resposne = await makeLogin(email, password)
+
+            if(!resposne.success && resposne.error)
+                return ShowMessage(
+                    toast,
+                    resposne.error
+                )
+
+            if(resposne.success)
+                return router.replace("/")
+        } catch {
+            ShowMessage(
+                toast,
+                "Erro interno"
+            )
+        }
     }
 
 
@@ -23,6 +44,7 @@ export const SignInForm = () => {
                 placeholder="Email"
                 setState={setEmail}
                 value={email}
+                type="email"
             />
             <Input
                 placeholder="Senha"
@@ -30,12 +52,12 @@ export const SignInForm = () => {
                 value={password}
                 isPassword
             />
-            <Button
+            <MyButton
                 label="Entrar"
-                onClick={handleEnterButton}
+                onClick={HandleEnterButton}
                 size="g"
                 className="mt-4"
-                />
+            />
         </div>
     )
 }

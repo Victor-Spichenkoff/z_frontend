@@ -11,10 +11,11 @@ interface IInput {
     isPassword?: boolean
     isFilled?: boolean
     icon?: IconDefinition
+    type?: string
 }
 
 export const Input = (
-    { placeholder, setState, value, isPassword, isFilled, icon }: IInput
+    { placeholder, setState, value, isPassword, isFilled, icon, type = "text" }: IInput
 ) => {
     const [showPassword, setShowPassword] = useState(false)
 
@@ -26,7 +27,7 @@ export const Input = (
             {icon && <FontAwesomeIcon icon={icon} className="size-6 text-gray-500 ml-4" />}
             <input
                 className="flex-1 outline-none bg-transparent h-full px-4"
-                type={isPassword && !showPassword? "password" : "text"}
+                type={isPassword && !showPassword? "password" : type }
                 placeholder={placeholder}
                 value={value}
                 onChange={e => setState && setState(e.target.value)}

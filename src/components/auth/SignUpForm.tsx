@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Input } from "../ui/Input"
-import { Button } from "../ui/Button"
+import { MyButton } from "../ui/MyButton"
 
 export const SignUpForm = () => {
     const router = useRouter()
@@ -35,7 +35,7 @@ export const SignUpForm = () => {
                 value={password}
                 isPassword
             />
-            <Button
+            <MyButton
                 label="Entrar"
                 onClick={handleEnterButton}
                 size="g"
