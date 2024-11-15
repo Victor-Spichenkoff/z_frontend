@@ -3,7 +3,7 @@
 import { api } from "@/lib/api"
 import {  redirect } from "next/navigation"
 import { clearAuthStorage, writeAuthData } from "./managerAuthStorage"
-import { useEffect } from "react"
+import { getFirstErrorElementMessageFromApiResponse } from "./Message"
 
 /**
  * 
@@ -28,6 +28,30 @@ export const makeLogin = async (email: string, password: string) => {
 }
 
 
+
+/**
+ * 
+ * @param email 
+ * @param password 
+ * @returns success: true(pode logar) ou false (error); message: só se der erro
+ */
+export const makeSignUp = async (name: string, email: string, password: string) => {
+    try {
+        const authorizedUser = await api.post("/auth/signup", {
+            name, email, password
+        })
+
+        writeAuthData(authorizedUser.data)
+
+        return { success: true }
+    } catch(e:any) {
+        let errorMessage = getFirstErrorElementMessageFromApiResponse(e)
+
+        return { success: false,  error: errorMessage }
+    }
+}
+
+
 export const checkIfLoggedAndRedirect = async () => {
     try {
         await api("/private/teste")
@@ -40,3 +64,5 @@ export const logout = () => {
     clearAuthStorage()
     redirect("/signin")
 }
+
+
