@@ -1,3 +1,5 @@
+"use client"
+
 import { checkIfLoggedAndRedirect } from "@/utils/auth"
 import { useEffect } from "react"
 

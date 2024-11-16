@@ -28,7 +28,7 @@ export const SignInForm = () => {
                 )
 
             if(resposne.success)
-                return router.replace("/")
+                return router.replace("/home")
         } catch {
             ShowMessage(
                 toast,

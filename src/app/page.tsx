@@ -1,22 +1,21 @@
 "use client"
 
+import { Logo } from "@/components/ui/logo"
 import { useCheckLogin } from "@/hooks/useCheckLogin"
-import { logout } from "@/utils/auth"
-import Link from "next/link"
-import { useState } from "react"
+import { useRouter } from "next/navigation"
 
-export default function Home() {
-  // useEffect(()=> { checkIfLoggedAndRedirect() }, [])
+
+export default function Barra() {
   useCheckLogin()
 
+  const router = useRouter()
+  router.push("/home")
+
   return (
-    <div>
-      <div className="">Olá</div>
-      <Link href="/signup">Logar</Link>
-      <div>
-        <button onClick={logout}>Sair</button>
-      </div>
-    </div>
+    <div className="min-h-screen flex justify-center items-center">
+      <Logo  size={80} />
+
+    </div> 
   )
 }
 

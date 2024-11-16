@@ -26,7 +26,7 @@ export const SignUpForm = () => {
                 )
 
             if (creationResponse.success) {
-                return router.replace("/")
+                return router.replace("/home")
             }
 
         } catch {
