@@ -2,23 +2,28 @@ import { authKey } from "@/global"
 import { AuthUSer } from "@/types/AuthUser"
 
 export const writeAuthData = (data: AuthUSer) => {
+    if (typeof window == "undefined") return
     localStorage.setItem(authKey, JSON.stringify(data))
 }
 
-export const getAuthData = (): AuthUSer | null =>  {
+export const getAuthData = (): AuthUSer | null => {
+    if (typeof window == "undefined") return null
     const storageString = localStorage.getItem(authKey)
-    
-    
 
-    if(!storageString)
+
+
+    if (!storageString)
         return null
 
     const content = JSON.parse(storageString)
 
-    if(!content.token || !content.user.name)
-        return null 
+    if (!content.token || !content.user.name)
+        return null
 
     return content as AuthUSer
 }
 
-export const clearAuthStorage = () => localStorage.setItem(authKey, "")
+export const clearAuthStorage = () => {
+    if (typeof window == "undefined") return
+    localStorage.setItem(authKey, "")
+}
