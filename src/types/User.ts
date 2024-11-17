@@ -6,6 +6,5 @@ export type User = {
     bio?: string
     link: string
     tweetsCount?: number
-    followingCount?: number 
-    followersCount?: number
+    followingCount?: number
 }

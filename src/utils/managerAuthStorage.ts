@@ -1,13 +1,14 @@
+"use client"
 import { authKey } from "@/global"
 import { AuthUSer } from "@/types/AuthUser"
 
 export const writeAuthData = (data: AuthUSer) => {
-    if (typeof window == "undefined") return
+    // if (typeof window == "undefined") return
     localStorage.setItem(authKey, JSON.stringify(data))
 }
 
 export const getAuthData = (): AuthUSer | null => {
-    if (typeof window == "undefined") return null
+    // if (typeof window == "undefined") return null
     const storageString = localStorage.getItem(authKey)
 
 
@@ -24,6 +25,7 @@ export const getAuthData = (): AuthUSer | null => {
 }
 
 export const clearAuthStorage = () => {
+    console.log("DESLIGAR");
     if (typeof window == "undefined") return
-    localStorage.setItem(authKey, "")
+    // localStorage.setItem(authKey, "")
 }

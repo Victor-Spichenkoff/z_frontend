@@ -2,7 +2,7 @@
 
 import { api } from "@/lib/api"
 import {  redirect } from "next/navigation"
-import { clearAuthStorage, writeAuthData } from "./managerAuthStorage"
+import { clearAuthStorage, getAuthData, writeAuthData } from "./managerAuthStorage"
 import { getFirstErrorElementMessageFromApiResponse } from "./Message"
 
 /**
@@ -13,14 +13,13 @@ import { getFirstErrorElementMessageFromApiResponse } from "./Message"
  */
 export const makeLogin = async (email: string, password: string) => {
     try {
-
-
         const authorizedUser = await api.post("/auth/signin", {
             email, password
         })
 
         writeAuthData(authorizedUser.data)
 
+        console.log(getAuthData())
         return { success: true }
     } catch {
         return { success: false,  error: "Acesso negado" }
@@ -53,6 +52,7 @@ export const makeSignUp = async (name: string, email: string, password: string) 
 
 
 export const checkIfLoggedAndRedirect = async () => {
+    console.log(getAuthData())
     try {
         await api("/private/teste")
     } catch {
