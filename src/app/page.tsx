@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 
 
 export default function Barra() {
-  // useCheckLogin()
+  useCheckLogin()
 
   const router = useRouter()
   router.push("/home")

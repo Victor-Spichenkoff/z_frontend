@@ -51,7 +51,7 @@ export const NavMyProfile = () => {
                     className="block truncate"
                 >{user.name}</Link>
                 <div className="text-sm text-gray-400">
-
+                    <div className="text-sm text-gray-400 block truncate">@{user.slug}</div>
                 </div>
             </div>
         </div>
