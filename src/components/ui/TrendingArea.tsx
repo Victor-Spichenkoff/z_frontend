@@ -3,7 +3,7 @@
 import { useEffect, useState, useTransition } from "react"
 import { SkeletonTrendingWaitArea, TrendingItem } from "./TrendingItem"
 import { Trend } from "@/types/trend"
-import { getTrendings } from "@/utils/trends"
+import { getTrendings } from "@/actions/trends"
 
 export const TrendingArea = () => {
     const [trendings, setTrendings] = useState<Trend[]>()

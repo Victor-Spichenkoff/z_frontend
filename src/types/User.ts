@@ -8,3 +8,9 @@ export type User = {
     tweetsCount?: number
     followingCount?: number
 }
+
+export type SuggestionUser = {
+    name: string
+    avatar: string
+    slug: string
+}

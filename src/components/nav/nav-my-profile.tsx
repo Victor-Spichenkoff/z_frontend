@@ -1,37 +1,29 @@
 "use client"
 
 import { getUserData } from "@/actions/user"
-import { useCheckLogin } from "@/hooks/useCheckLogin"
 import { User } from "@/types/User"
 import { getAuthData } from "@/utils/managerAuthStorage"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useCallback, useEffect, useState } from "react"
-import { Sleep } from "../utils/sleep"
+import { useEffect, useState } from "react"
 
 export const NavMyProfile = () => {
     const router = useRouter()
     const [user, setUser] = useState<User | null>()
 
     useEffect(() => {
-        (async function () {
-            await Sleep(5000)// esperar o login ser feito   
-
+        (async function () {   
             const storageAuthData = getAuthData()
-            console.log(storageAuthData)
 
             if (!storageAuthData?.user.slug)
-                console.log("Sem slug")
-                // router.push("signin")
+                router.push("signin")
 
 
             const response = await getUserData(String(storageAuthData?.user.slug))
 
             if (response == null)
-                console.log("Reposta nula / pegar no server dados profile")
-                // return router.push("signin")
+                return router.push("signin")
 
             setUser(response)
 
@@ -48,7 +40,7 @@ export const NavMyProfile = () => {
                     <Image
                         src={user?.avatar}
                         alt={user.name}
-                        // className="size-full"
+                        className="size-full"
                         width={100}
                         height={100}
                     />

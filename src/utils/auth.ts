@@ -18,8 +18,7 @@ export const makeLogin = async (email: string, password: string) => {
         })
 
         writeAuthData(authorizedUser.data)
-
-        console.log(getAuthData())
+        
         return { success: true }
     } catch {
         return { success: false,  error: "Acesso negado" }
