@@ -11,7 +11,8 @@ export const getAuthData = (): AuthUSer | null => {
     // if (typeof window == "undefined") return null
     const storageString = localStorage.getItem(authKey)
 
-
+    // console.log("PEGANDO DADPS")
+    // console.log(storageString)
 
     if (!storageString)
         return null
@@ -20,12 +21,10 @@ export const getAuthData = (): AuthUSer | null => {
 
     if (!content.token || !content.user.name)
         return null
-
     return content as AuthUSer
 }
 
 export const clearAuthStorage = () => {
-    console.log("DESLIGAR");
     if (typeof window == "undefined") return
-    // localStorage.setItem(authKey, "")
+    localStorage.setItem(authKey, "");
 }

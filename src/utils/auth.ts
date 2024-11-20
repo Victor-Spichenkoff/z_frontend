@@ -52,15 +52,16 @@ export const makeSignUp = async (name: string, email: string, password: string) 
 
 
 export const checkIfLoggedAndRedirect = async () => {
-    console.log(getAuthData())
     try {
         await api("/private/teste")
     } catch {
+        console.log("Detectado que não está logado")
         redirect("/signin")
     }
 }
 
 export const logout = () => {
+    console.log("Saindo...")
     clearAuthStorage()
     redirect("/signin")
 }

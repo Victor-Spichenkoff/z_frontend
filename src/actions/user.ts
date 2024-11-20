@@ -3,6 +3,8 @@ import { User } from "@/types/User";
 
 export const getUserData = async (slug: string) => {
     try {
+        console.log("HEADERS")
+        console.log(api.defaults.headers)
         const res = await api("/user/" + slug)
         let finalUser = res.data
         if(finalUser.user.slug) {

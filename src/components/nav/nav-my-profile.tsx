@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
+import { Sleep } from "../utils/sleep"
 
 export const NavMyProfile = () => {
     const router = useRouter()
@@ -16,17 +17,24 @@ export const NavMyProfile = () => {
 
     useEffect(() => {
         (async function () {
+            await Sleep(5000)// esperar o login ser feito   
+
             const storageAuthData = getAuthData()
+            console.log(storageAuthData)
+
             if (!storageAuthData?.user.slug)
-                router.push("signin")
+                console.log("Sem slug")
+                // router.push("signin")
+
 
             const response = await getUserData(String(storageAuthData?.user.slug))
 
             if (response == null)
-                return router.push("signin")
+                console.log("Reposta nula / pegar no server dados profile")
+                // return router.push("signin")
 
             setUser(response)
-            console.log(response.avatar)
+
         })()
     }, [])
 

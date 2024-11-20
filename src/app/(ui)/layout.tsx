@@ -2,6 +2,7 @@ import { NavItem } from "@/components/nav/nav-item"
 import { NavLougout } from "@/components/nav/nav-lougout"
 import { NavMyProfile } from "@/components/nav/nav-my-profile"
 import { Logo } from "@/components/ui/logo"
+import { RecommendationArea } from "@/components/ui/RecommendationArea"
 import { TrendingArea } from "@/components/ui/TrendingArea"
 import { SearchInput } from "@/components/utils/SearchInput"
 import { faHouse, faUser } from "@fortawesome/free-solid-svg-icons"
@@ -45,6 +46,7 @@ export default function UiLayout({ children }: Readonly<IUiLayout>) {
             <aside className="hidden lg:flex flex-col gap-6 sticky top-0 h-fit w-96 px-8 py-6 border-l-2 border-gray-900">
                 <SearchInput hiddenOnSearch/>
                 <TrendingArea />
+                <RecommendationArea />
             </aside>
         </main>
     )

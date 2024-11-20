@@ -5,7 +5,7 @@ import { logout } from "@/utils/auth"
 import { Link } from "lucide-react"
 
 export default function Home() {
-    // useCheckLogin()
+    useCheckLogin()
 
     return (
         <div>
