@@ -3,6 +3,7 @@ import Link from "next/link"
 import { MyButton } from "./MyButton"
 import { useState } from "react"
 import { api } from "@/lib/api"
+import Image from "next/image"
 
 interface RecommendationItemProps {
     user: SuggestionUser
@@ -13,7 +14,7 @@ export const RecommendationItem = ({ user }: RecommendationItemProps) => {
     const handleFollowClick = async () => {
         try {
             const res = await api.post(`/user/${user.slug}/follow`)
-            if(res.data)
+            if (res.data)
                 setIsStartedFollow(res.data.following)
         } catch {
             return null
@@ -24,10 +25,13 @@ export const RecommendationItem = ({ user }: RecommendationItemProps) => {
         <div className="flex items-center">
             <div className="size-10 mr-2 rounded-full overflow-hidden">
                 <Link href={`/${user.slug}`}>
-                    <img
-                        src={user.avatar}
+                    <Image
+                        src={user?.avatar}
                         alt={user.name}
-                        className="size-full" />
+                        className="size-full"
+                        width={100}
+                        height={100}
+                    />
                 </Link>
             </div>
             <div className="flex-1 overflow-hidden ">

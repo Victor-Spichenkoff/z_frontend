@@ -14,7 +14,7 @@ interface IUiLayout {
 export default function UiLayout({ children }: Readonly<IUiLayout>) {
     return (
         <main className="min-h-screen flex justify-center mx-auto max-w-7xl">
-            <section className="__hidden flex lg:flex flex-col sticky top-0 h-screen w-72 px-3 border-r-2 border-gray-900">
+            <section className="hidden lg:flex flex-col sticky top-0 h-screen w-72 px-3 border-r-2 border-gray-900">
                 <div className="flex-1 mt-6">
                     <Logo size={24} />
                     <nav className="mt-11">

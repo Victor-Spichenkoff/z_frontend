@@ -1,19 +1,16 @@
 "use client"
 
+import { HomeHeader } from "@/components/home/Header.home"
+import { TweetPost } from "@/components/tweet/PostTweet"
 import { useCheckLogin } from "@/hooks/useCheckLogin"
-import { logout } from "@/utils/auth"
-import { Link } from "lucide-react"
 
 export default function Home() {
     useCheckLogin()
 
     return (
         <div>
-            <div className="">Olá</div>
-            <Link href="/signup">Logar</Link>
-            <div>
-                <button onClick={logout}>Sair</button>
-            </div>
+            <HomeHeader />
+            <TweetPost />
         </div>
     )
 }
