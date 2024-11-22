@@ -4,17 +4,20 @@ import { faImage, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useTransition } from "react"
 import { MyButton } from "../ui/MyButton"
 import { useToast } from "@/hooks/use-toast"
 import { ShowMessage } from "../utils/Message"
 import { ImagePreview } from "../utils/ImagePreview"
+import { api } from "@/lib/api"
+import { Sleep } from "../utils/sleep"
 
 
 export const TweetPost = () => {
     const textareaRef = useRef<HTMLTextAreaElement>(null)
     const router = useRouter()
-    const toast = useToast()
+    const { toast } = useToast()
+    const [isLoading, startTransition] = useTransition()
     const [authUser, setAuthUser] = useState<AuthUSer | null>(null)
     const [tweetBody, setTweetBody] = useState("")
     const [image, setImage] = useState<null | Blob>(null)
@@ -62,10 +65,29 @@ export const TweetPost = () => {
 
     const handlePostClick = () => {
         const formData = new FormData()
+        const authUSer = getAuthData()
+        if(!authUser.user.slug)
+            return ShowMessage(toast, "Usuário inexistente")
 
         formData.append("body", tweetBody)
+        formData.append("userSlug", String(authUSer?.user.slug))
         if (image)
             formData.append("image", image)
+
+        startTransition(async ()=> { 
+            try {
+                const res = await api.post("tweet", formData)
+                console.log(res)
+
+                ShowMessage(toast, "Criado...", true)
+
+                setImage(null)
+                setTweetBody("")
+                setImagePreview(null)
+            }  catch {
+                ShowMessage(toast, "Erro na criação")
+            }
+        })
     }
 
 
@@ -84,8 +106,6 @@ export const TweetPost = () => {
                     className="rounded-full"
                     width={100}
                     height={100}
-                // width={50}
-                // height={50}
                 />
             </div>
             <div className="flex-1">
@@ -136,9 +156,9 @@ export const TweetPost = () => {
                         <MyButton
                             label="Postar"
                             size={"m"}
-                            onClick={handlePostClick}
-                            className="px-3 py-2"
-                        />
+                            onClick={!isLoading ? handlePostClick : ()=>{}}
+                            className={`px-3 py-2 ${isLoading && "opacity-85 cursor-default hover:none"}`}
+                        />  
                     </div>
                 </div>
             </div>

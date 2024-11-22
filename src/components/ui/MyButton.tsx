@@ -2,10 +2,11 @@ interface IButton {
     label: string
     size: "p" | "m" | "g"
     onClick?: () => void
-    className?: string
+    className?: string,
+    isDisabled?: boolean
 }
 
-export const MyButton = ({ label, size = "g", onClick, className }: IButton) => {
+export const MyButton = ({ label, size = "g", onClick, className, isDisabled }: IButton) => {
     let buttonSizeStyle
 
     switch (size) {
@@ -24,7 +25,9 @@ export const MyButton = ({ label, size = "g", onClick, className }: IButton) => 
                 ${buttonSizeStyle}
                 ${className}
                 `}
-            onClick={onClick}>
+            onClick={onClick}
+            disabled={isDisabled}
+            >
             { label }
         </button>
     )
