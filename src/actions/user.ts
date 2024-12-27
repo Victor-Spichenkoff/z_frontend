@@ -8,8 +8,8 @@ export const getUserData = async (slug: string) => {
         if(finalUser.user.slug) {
             finalUser = {... finalUser.user,
                 tweetsCount: res.data.tweetsCount,
-                followingCount: res.data.followingCount
-
+                followingCount: res.data.followingCount,
+                followersCount: res.data.followersCount
             }
             return finalUser as User//erro aqui
         }

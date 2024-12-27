@@ -7,6 +7,7 @@ export type User = {
     link: string
     tweetsCount?: number
     followingCount?: number
+    followersCount?: number
 }
 
 export type SuggestionUser = {

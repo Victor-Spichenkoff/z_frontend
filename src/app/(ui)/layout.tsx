@@ -1,3 +1,5 @@
+"use client"
+
 import { NavItem } from "@/components/nav/nav-item"
 import { NavLougout } from "@/components/nav/nav-lougout"
 import { NavMyProfile } from "@/components/nav/nav-my-profile"
@@ -6,6 +8,7 @@ import { RecommendationArea } from "@/components/ui/RecommendationArea"
 import { TrendingArea } from "@/components/ui/TrendingArea"
 import { SearchInput } from "@/components/utils/SearchInput"
 import { faHouse, faUser } from "@fortawesome/free-solid-svg-icons"
+import {getAuthData} from "@/utils/managerAuthStorage";
 
 interface IUiLayout {
     children: React.ReactNode
@@ -24,14 +27,10 @@ export default function UiLayout({ children }: Readonly<IUiLayout>) {
                             icon={faHouse}
                         />
                         <NavItem
-                            href="/profile"
+                            alternativeEndpoints={["/edit"]}
+                            href={`/${getAuthData()?.user.slug}`}
                             label="Meu Perfil"
                             icon={faUser}
-                        />
-                        <NavItem
-                            href="/home"
-                            label="home"
-                            icon={faHouse}
                         />
                     </nav>
                 </div>

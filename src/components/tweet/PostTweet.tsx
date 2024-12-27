@@ -77,7 +77,6 @@ export const TweetPost = () => {
         startTransition(async ()=> { 
             try {
                 const res = await api.post("tweet", formData)
-                console.log(res)
 
                 ShowMessage(toast, "Criado...", true)
 

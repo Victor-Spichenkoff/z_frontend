@@ -2,6 +2,7 @@ import { Rubik } from 'next/font/google'
 import type { Metadata } from "next"
 import "./globals.css"
 import { Toaster } from '@/components/ui/toaster';
+import {Footer} from "@/components/ui/Footer";
 
 
 const rubik = Rubik({
@@ -26,10 +27,11 @@ export default function RootLayout({
       <link rel="icon" href="./logo.png" type="image/x-icon"/>
       </head>
       <body
-        className={`${rubik.variable} antialiased`}
+        className={`${rubik.variable} antialiased relative`}
       >
         {children}
         <Toaster />
+        <Footer />
       </body>
     </html>
   );
