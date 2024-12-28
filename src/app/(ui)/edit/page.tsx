@@ -134,31 +134,31 @@ export default function EditPage() {
     // }, [name, link, bio])
     //
     //
-    // const handleSaveChanges = async () => {
-    //     try {
-    //         const res = await api.put("/user", {
-    //             name,
-    //             bio,
-    //             link
-    //         })
-    //
-    //         if (res.data) {
-    //             ShowMessage(
-    //                 toast,
-    //                 "Salvo com sucesso!",
-    //                 true
-    //             )
-    //
-    //             setShowSaveButton(false)
-    //         }
-    //
-    //     } catch {
-    //         ShowMessage(
-    //             toast,
-    //             "Não foi possível salvar as alterações"
-    //         )
-    //     }
-    // }
+    co'nst handleSaveChanges = async () => {
+        try {
+            const res = await api.put("/user", {
+                name,
+                bio,
+                link
+            })
+
+            if (res.data) {
+                ShowMessage(
+                    toast,
+                    "Salvo com sucesso!",
+                    true
+                )
+
+                setShowSaveButton(false)
+            }
+
+        } catch {
+            ShowMessage(
+                toast,
+                "Não foi possível salvar as alterações"
+            )
+        }
+    }'
 
     return (
         <div>
