@@ -33,7 +33,6 @@ export default function EditProfile() {
     const {toast} = useToast()
     const router = useRouter()
     const searchParams = useSearchParams()
-    const [isLoading, startTransition] = useTransition()
     const [name, setName] = useState("")
     const [bio, setBio] = useState("")
     const [cover, setCover] = useState("")
@@ -41,16 +40,13 @@ export default function EditProfile() {
     const [link, setLink] = useState("")
     const [showSaveButton, setShowSaveButton] = useState(false)
     const [isLoaded, setIsLoaded] = useState(false)// erro vercel
-    const [isMineProfile, setIsMineProfile] = useState(false)
-    const {slug} = params
-
-    if(!location || !localStorage || typeof window == "undefined")
-        return null
 
 
     useEffect(() => {
-        if (getAuthData()?.user.slug != searchParams.get("slug"))
-            return router.push("/edit/ladrao")
+        if (getAuthData()?.user.slug != searchParams.get("slug")) {
+            router.push("/edit/ladrao")
+            return
+        }
 
         // erro vercel
         if (
@@ -114,15 +110,6 @@ export default function EditProfile() {
             )
         }
     }
-
-    if(!isLoaded)
-        return <div>
-            Carregando...
-        </div>
-
-    if(!name || !avatar || !link)
-        return null
-
 
     return (
         <div>
