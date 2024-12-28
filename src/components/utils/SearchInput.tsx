@@ -28,7 +28,7 @@ export const SearchInput = ({ defaultValue, hiddenOnSearch }: SearchInputProps) 
     }
 
     return (
-        <Input 
+        <Input
             placeholder="Buscar"
             icon={faMagnifyingGlass}
             isFilled

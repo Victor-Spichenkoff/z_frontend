@@ -20,6 +20,7 @@ import {Toast} from "@/components/ui/toast";
 import {useToast} from "@/hooks/use-toast";
 import {ShowMessage} from "@/components/utils/Message";
 import {api} from "@/lib/api";
+import {TextArea} from "@/components/ui/TextArea";
 
 
 const giveCorrectCoverImage = (coverImageUrl: string) => {
@@ -159,7 +160,7 @@ export default function EditProfile() {
                 <div className="px-6 mt-4 space-y-4">
                     <Input placeholder={"Nome"} setState={setName} value={name} label={"Nome"}/>
                     <Input placeholder={"Link"} setState={setLink} value={link} label={"Link"}/>
-                    <Input placeholder={"Bio"} setState={setBio} value={bio} label={"Bio"}/>
+                    <TextArea placeholder={"Descreva você"} rows={4} value={bio} setState={setBio} label={"Bio"} />
                 </div>
                 {showSaveButton && (
                     <div className='flex justify-center items-center'>

@@ -17,6 +17,7 @@ export const FeedItem = ({ tweet }: FeedItemProps) => {
   const [isLiked, setIsLiked] = useState(false)
   const [likesCount, setLikesCount] = useState(tweet.likes?.length)
 
+
   const handleLikeClick = async (onlyLoadState = false) => {
     if (onlyLoadState) {
       const user = getAuthData()
@@ -39,7 +40,6 @@ export const FeedItem = ({ tweet }: FeedItemProps) => {
 
   useEffect(() => { handleLikeClick(true) }, [])
 
-  console.log(tweet)
 
   return (
     <div className="flex gap-6 border-b-2 border-gray-900">
