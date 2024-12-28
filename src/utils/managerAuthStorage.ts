@@ -8,7 +8,8 @@ export const writeAuthData = (data: AuthUSer) => {
 }
 
 export const getAuthData = (): AuthUSer | null => {
-    // if (typeof window == "undefined") return null
+    if (typeof window == "undefined") return null
+
     const storageString = localStorage.getItem(authKey)
 
     // console.log("PEGANDO DADPS")

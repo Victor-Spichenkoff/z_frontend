@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {GeneralHeader} from "@/components/ui/generalHeader"
 import {useParams, useRouter, useSearchParams} from "next/navigation"
@@ -26,7 +26,7 @@ const giveCorrectCoverImage = (coverImageUrl: string) => {
 }
 
 
-export default function EditProfile() {
+export default function EditPage() {
     useCheckLogin()
 
     const params = useParams()
@@ -43,6 +43,8 @@ export default function EditProfile() {
 
 
     useEffect(() => {
+        if (typeof window === "undefined") return
+
         if (getAuthData()?.user.slug != searchParams.get("slug")) {
             router.push("/edit/ladrao")
             return
