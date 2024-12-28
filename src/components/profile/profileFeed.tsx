@@ -12,10 +12,10 @@ interface ProfileFeedProps {
 
 export const ProfileFeed = ({ userSlug }: ProfileFeedProps) => {
     const [tweets, setTweets] = useState<Tweet[] | null>()
-    
+
     const getTweets = async () => {
         const res = await api(`/user/${userSlug}/tweets`)
-        if(!res.data)
+        if (!res.data)
             return
 
         setTweets(res.data.tweets)
@@ -23,28 +23,28 @@ export const ProfileFeed = ({ userSlug }: ProfileFeedProps) => {
 
 
 
-    useEffect(()=> {
+    useEffect(() => {
         getTweets()
     }, [])
 
 
-    if(tweets?.length == 0)
+    if (tweets?.length == 0)
         return <div className="flex justify-center my-5 text-xl">
-Usuário sem tweets
+            Usuário sem tweets
         </div>
 
 
-    if(!tweets)
+    if (!tweets)
         return <div className="flex justify-center my-5 text-xl">
-    Nada para mostrar aqui
-            </div>
-    
-    
+            Nada para mostrar aqui
+        </div>
+
+
     return (
         <div>
-            { tweets.map((tweet)=> (
-                <FeedItem tweet={tweet} key={tweet.id}/>
-            )) }
+            {tweets.map((tweet) => (
+                <FeedItem tweet={tweet} key={tweet.id} />
+            ))}
         </div>
     )
 }

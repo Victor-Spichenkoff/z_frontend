@@ -120,7 +120,9 @@ export default function EditProfile() {
     }
 
     if(!isLoaded)
-        return null
+        return <div>
+            Carregando...
+        </div>
 
     if(!name || !avatar || !link)
         return null
