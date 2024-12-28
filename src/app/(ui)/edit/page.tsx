@@ -26,12 +26,10 @@ const giveCorrectCoverImage = (coverImageUrl: string) => {
 
 export default function EditPage() {
     useCheckLogin()
-
-    const params = useParams()
     const {toast} = useToast()
     const router = useRouter()
-    const searchParams = new URLSearchParams(location.search);
-    // const searchParams = useSearchParams()
+    const searchParams = useSearchParams()
+
 
     const [name, setName] = useState("")
     const [bio, setBio] = useState("")
@@ -51,9 +49,9 @@ export default function EditPage() {
             return
         }
 
+
         // erro vercel
         if (
-            !searchParams ||
             !searchParams.get("name") ||
             !searchParams.get("bio") ||
             !searchParams.get("link") ||
@@ -114,11 +112,13 @@ export default function EditPage() {
         }
     }
 
+    if(!isLoaded)
+        return <div>
+            Nada para ver...
+        </div>
+
 
     return (
-        <Suspense>
-
-
         <div>
             <GeneralHeader backHref="/home">
                 <div className="font-bold text-lg">Editar perfil</div>
@@ -187,6 +187,5 @@ export default function EditPage() {
                 )}
             </section>
         </div>
-        </Suspense>
     )
 }
