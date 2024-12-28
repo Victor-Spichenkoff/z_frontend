@@ -50,6 +50,10 @@ export default function EditProfile() {
     const [isMineProfile, setIsMineProfile] = useState(false)
     const {slug} = params
 
+    if(!searchParams.get("name") || !searchParams.get("bio") || !searchParams.get("link"))
+        return null
+
+
     useEffect(() => {
         if (getAuthData()?.user.slug != searchParams.get("slug"))
             return router.push("/edit/ladrao")
