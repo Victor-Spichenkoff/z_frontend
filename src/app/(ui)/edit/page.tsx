@@ -51,6 +51,9 @@ export default function EditProfile() {
     const [isMineProfile, setIsMineProfile] = useState(false)
     const {slug} = params
 
+    if(!location || !localStorage)
+        return null
+
 
     useEffect(() => {
         if (getAuthData()?.user.slug != searchParams.get("slug"))
