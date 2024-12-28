@@ -1,27 +1,20 @@
-"use client";
+"use client"
 
-import {getUserData} from "@/actions/user"
 import {GeneralHeader} from "@/components/ui/generalHeader"
-import {User} from "@/types/User"
 import {useParams, useRouter, useSearchParams} from "next/navigation"
-import {useCallback, useEffect, useState, useTransition} from "react"
+import {useEffect, useState, useTransition} from "react"
 // import CoverImage from "@/assets/cover_default.jpg"
 import CoverImage from "@/assets/default_cover.jpg"
 import Image from "next/image"
 import {MyButton} from "@/components/ui/MyButton"
-import Link from "next/link"
 import {getAuthData} from "@/utils/managerAuthStorage"
-import {FollowButton} from "@/components/utils/FollowButton"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faCamera, faLink, faXmark} from "@fortawesome/free-solid-svg-icons"
-import {ProfileFeed} from "@/components/profile/profileFeed"
+import {faCamera, faXmark} from "@fortawesome/free-solid-svg-icons"
 import {Input} from "@/components/ui/Input";
-import {Toast} from "@/components/ui/toast";
 import {useToast} from "@/hooks/use-toast";
 import {ShowMessage} from "@/components/utils/Message";
 import {api} from "@/lib/api";
 import {TextArea} from "@/components/ui/TextArea";
-import {checkIfLoggedAndRedirect} from "@/utils/auth";
 import {useCheckLogin} from "@/hooks/useCheckLogin";
 
 
@@ -51,7 +44,7 @@ export default function EditProfile() {
     const [isMineProfile, setIsMineProfile] = useState(false)
     const {slug} = params
 
-    if(!location || !localStorage)
+    if(!location || !localStorage || typeof window == "undefined")
         return null
 
 
