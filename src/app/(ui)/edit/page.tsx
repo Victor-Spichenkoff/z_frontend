@@ -1,4 +1,5 @@
-"use client";
+"use client"
+"use client"
 
 import {GeneralHeader} from "@/components/ui/generalHeader"
 import {useParams, useRouter, useSearchParams} from "next/navigation"
@@ -26,7 +27,7 @@ const giveCorrectCoverImage = (coverImageUrl: string) => {
 
 
 export default function EditPage() {
-    // useCheckLogin()
+    useCheckLogin()
 
     const params = useParams()
     const {toast} = useToast()
