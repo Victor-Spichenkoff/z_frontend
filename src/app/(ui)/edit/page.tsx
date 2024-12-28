@@ -27,27 +27,30 @@ const giveCorrectCoverImage = (coverImageUrl: string) => {
 
 
 export default function EditPage() {
-    const searchParams = useSearchParams();
-    const router = useRouter();
-    const { toast } = useToast();
+useCheckLogin()
 
-    const [name, setName] = useState("");
-    const [bio, setBio] = useState("");
-    const [cover, setCover] = useState("");
-    const [avatar, setAvatar] = useState("");
-    const [link, setLink] = useState("");
-    const [showSaveButton, setShowSaveButton] = useState(false);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const params = useParams()
+    const {toast} = useToast()
+    const router = useRouter()
+    const searchParams = useSearchParams()
+    const [name, setName] = useState("")
+    const [bio, setBio] = useState("")
+    const [cover, setCover] = useState("")
+    const [avatar, setAvatar] = useState("")
+    const [link, setLink] = useState("")
+    const [showSaveButton, setShowSaveButton] = useState(false)
+    const [isLoaded, setIsLoaded] = useState(false)// erro vercel
+
 
     useEffect(() => {
-        if (typeof window === "undefined") return;
+        if (typeof window === "undefined") return
 
-        const authData = getAuthData();
-        if (authData?.user.slug !== searchParams?.get("slug")) {
-            router.push("/edit/ladrao");
-            return;
-        }
+        // if (getAuthData()?.user.slug != searchParams.get("slug")) {
+        //     router.push("/edit/ladrao")
+        //     return
+        // }
 
+        // erro vercel
         if (
             !searchParams ||
             !searchParams.get("name") ||
@@ -60,80 +63,30 @@ export default function EditPage() {
             return;
         }
 
-        setName(decodeURIComponent(String(searchParams.get("name"))));
-        setLink(decodeURIComponent(String(searchParams.get("link"))));
-        setBio(decodeURIComponent(String(searchParams.get("bio"))));
-        setAvatar(decodeURIComponent(String(searchParams.get("avatar"))));
-        setCover(decodeURIComponent(String(searchParams.get("cover"))));
+        setName(decodeURIComponent(String(searchParams.get("name"))))
+        setLink(decodeURIComponent(String(searchParams.get("link"))))
+        setBio(decodeURIComponent(String(searchParams.get("bio"))))
+        setAvatar(decodeURIComponent(String(searchParams.get("avatar"))))
+        setCover(decodeURIComponent(String(searchParams.get("cover"))))
 
         setIsLoaded(true);
-    }, [searchParams, router]);
+    }, [searchParams, router])
 
-    if (!isLoaded) {
-        return <div>Carregando...</div>;
-    }
+    //verificar mudanças
+    useEffect(() => {
+        if (!searchParams) return
+
+        const url_name = decodeURIComponent(String(searchParams.get("name")))
+        const url_link = decodeURIComponent(String(searchParams.get("link")))
+        const url_bio = decodeURIComponent(String(searchParams.get("bio")))
+
+        if (url_name != name || url_link != link || url_bio != bio)
+            setShowSaveButton(true)
+        else
+            setShowSaveButton(false)
+    }, [name, link, bio])
 
 
-    // useCheckLogin()
-    //
-    // const params = useParams()
-    // const {toast} = useToast()
-    // const router = useRouter()
-    // const searchParams = useSearchParams()
-    // const [name, setName] = useState("")
-    // const [bio, setBio] = useState("")
-    // const [cover, setCover] = useState("")
-    // const [avatar, setAvatar] = useState("")
-    // const [link, setLink] = useState("")
-    // const [showSaveButton, setShowSaveButton] = useState(false)
-    // const [isLoaded, setIsLoaded] = useState(false)// erro vercel
-    //
-    //
-    // useEffect(() => {
-    //     if (typeof window === "undefined") return
-    //
-    //     if (getAuthData()?.user.slug != searchParams.get("slug")) {
-    //         router.push("/edit/ladrao")
-    //         return
-    //     }
-    //
-    //     // erro vercel
-    //     if (
-    //         !searchParams ||
-    //         !searchParams.get("name") ||
-    //         !searchParams.get("bio") ||
-    //         !searchParams.get("link") ||
-    //         !searchParams.get("avatar") ||
-    //         !searchParams.get("cover")
-    //     ) {
-    //         router.push("/edit/error");
-    //         return;
-    //     }
-    //
-    //     setName(decodeURIComponent(String(searchParams.get("name"))))
-    //     setLink(decodeURIComponent(String(searchParams.get("link"))))
-    //     setBio(decodeURIComponent(String(searchParams.get("bio"))))
-    //     setAvatar(decodeURIComponent(String(searchParams.get("avatar"))))
-    //     setCover(decodeURIComponent(String(searchParams.get("cover"))))
-    //
-    //     setIsLoaded(true);
-    // }, [searchParams, router])
-    //
-    // //verificar mudanças
-    // useEffect(() => {
-    //     if (!searchParams) return
-    //
-    //     const url_name = decodeURIComponent(String(searchParams.get("name")))
-    //     const url_link = decodeURIComponent(String(searchParams.get("link")))
-    //     const url_bio = decodeURIComponent(String(searchParams.get("bio")))
-    //
-    //     if (url_name != name || url_link != link || url_bio != bio)
-    //         setShowSaveButton(true)
-    //     else
-    //         setShowSaveButton(false)
-    // }, [name, link, bio])
-    //
-    //
     const handleSaveChanges = async () => {
         try {
             const res = await api.put("/user", {
