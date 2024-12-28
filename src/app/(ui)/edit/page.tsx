@@ -47,6 +47,7 @@ export default function EditProfile() {
     const [avatar, setAvatar] = useState("")
     const [link, setLink] = useState("")
     const [showSaveButton, setShowSaveButton] = useState(false)
+    const [isLoaded, setIsLoaded] = useState(false)// erro vercel
     const [isMineProfile, setIsMineProfile] = useState(false)
     const {slug} = params
 
@@ -74,9 +75,8 @@ export default function EditProfile() {
         setAvatar(decodeURIComponent(String(searchParams.get("avatar"))))
         setCover(decodeURIComponent(String(searchParams.get("cover"))))
 
-        console.log(cover)
-        console.log(searchParams.get("avatar"))
-    }, [])
+        setIsLoaded(true);
+    }, [searchParams, router])
 
     //verificar mudanças
     useEffect(() => {
@@ -118,6 +118,9 @@ export default function EditProfile() {
             )
         }
     }
+
+    if(!isLoaded)
+        return null
 
     if(!name || !avatar || !link)
         return null
