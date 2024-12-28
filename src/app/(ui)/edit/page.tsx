@@ -134,7 +134,7 @@ export default function EditPage() {
     // }, [name, link, bio])
     //
     //
-    co'nst handleSaveChanges = async () => {
+    const handleSaveChanges = async () => {
         try {
             const res = await api.put("/user", {
                 name,
@@ -158,7 +158,7 @@ export default function EditPage() {
                 "Não foi possível salvar as alterações"
             )
         }
-    }'
+    }
 
     return (
         <div>
