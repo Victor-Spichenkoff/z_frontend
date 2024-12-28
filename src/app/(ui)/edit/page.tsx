@@ -1,5 +1,4 @@
 "use client"
-"use client"
 
 import {GeneralHeader} from "@/components/ui/generalHeader"
 import {useParams, useRouter, useSearchParams} from "next/navigation"
@@ -17,7 +16,6 @@ import {api} from "@/lib/api";
 import {TextArea} from "@/components/ui/TextArea";
 import {useCheckLogin} from "@/hooks/useCheckLogin";
 
-
 const giveCorrectCoverImage = (coverImageUrl: string) => {
     if (!coverImageUrl.includes("default.png"))
         return coverImageUrl
@@ -32,7 +30,8 @@ export default function EditPage() {
     const params = useParams()
     const {toast} = useToast()
     const router = useRouter()
-    const searchParams = useSearchParams()
+    const searchParams = new URLSearchParams(location.search);
+    // const searchParams = useSearchParams()
 
     const [name, setName] = useState("")
     const [bio, setBio] = useState("")
