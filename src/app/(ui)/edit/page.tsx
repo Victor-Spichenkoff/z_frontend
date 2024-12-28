@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {getUserData} from "@/actions/user"
 import {GeneralHeader} from "@/components/ui/generalHeader"
@@ -50,13 +50,23 @@ export default function EditProfile() {
     const [isMineProfile, setIsMineProfile] = useState(false)
     const {slug} = params
 
-    if(!searchParams.get("name") || !searchParams.get("bio") || !searchParams.get("link"))
-        return null
-
 
     useEffect(() => {
         if (getAuthData()?.user.slug != searchParams.get("slug"))
             return router.push("/edit/ladrao")
+
+        // erro vercel
+        if (
+            !searchParams ||
+            !searchParams.get("name") ||
+            !searchParams.get("bio") ||
+            !searchParams.get("link") ||
+            !searchParams.get("avatar") ||
+            !searchParams.get("cover")
+        ) {
+            router.push("/edit/error");
+            return;
+        }
 
         setName(decodeURIComponent(String(searchParams.get("name"))))
         setLink(decodeURIComponent(String(searchParams.get("link"))))
@@ -70,7 +80,8 @@ export default function EditProfile() {
 
     //verificar mudanças
     useEffect(() => {
-        console.log("Cjecl")
+        if (!searchParams) return
+
         const url_name = decodeURIComponent(String(searchParams.get("name")))
         const url_link = decodeURIComponent(String(searchParams.get("link")))
         const url_bio = decodeURIComponent(String(searchParams.get("bio")))
@@ -90,14 +101,16 @@ export default function EditProfile() {
                 link
             })
 
-            if (res.data)
+            if (res.data) {
                 ShowMessage(
                     toast,
                     "Salvo com sucesso!",
                     true
                 )
 
-            setShowSaveButton(false)
+                setShowSaveButton(false)
+            }
+
         } catch {
             ShowMessage(
                 toast,
@@ -177,8 +190,6 @@ export default function EditProfile() {
 
                     </div>
                 )}
-
-
             </section>
         </div>
     )
