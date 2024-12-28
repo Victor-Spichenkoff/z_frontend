@@ -2,7 +2,7 @@
 
 import {GeneralHeader} from "@/components/ui/generalHeader"
 import {useParams, useRouter, useSearchParams} from "next/navigation"
-import {useEffect, useState, useTransition} from "react"
+import {Suspense, useEffect, useState, useTransition} from "react"
 import CoverImage from "@/assets/default_cover.jpg"
 import Image from "next/image"
 import {MyButton} from "@/components/ui/MyButton"
@@ -32,6 +32,7 @@ export default function EditPage() {
     const {toast} = useToast()
     const router = useRouter()
     const searchParams = useSearchParams()
+
     const [name, setName] = useState("")
     const [bio, setBio] = useState("")
     const [cover, setCover] = useState("")
@@ -42,6 +43,7 @@ export default function EditPage() {
 
 
     useEffect(() => {
+
         if (typeof window === "undefined") return
 
         if (getAuthData()?.user.slug != searchParams.get("slug")) {
@@ -113,10 +115,10 @@ export default function EditPage() {
     }
 
 
-    if (!isLoaded)
-        return null
-
     return (
+        <Suspense>
+
+
         <div>
             <GeneralHeader backHref="/home">
                 <div className="font-bold text-lg">Editar perfil</div>
@@ -185,5 +187,6 @@ export default function EditPage() {
                 )}
             </section>
         </div>
+        </Suspense>
     )
 }
