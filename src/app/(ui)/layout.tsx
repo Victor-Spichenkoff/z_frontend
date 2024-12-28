@@ -9,6 +9,7 @@ import { TrendingArea } from "@/components/ui/TrendingArea"
 import { SearchInput } from "@/components/utils/SearchInput"
 import { faHouse, faUser } from "@fortawesome/free-solid-svg-icons"
 import {getAuthData} from "@/utils/managerAuthStorage";
+import { Suspense } from "react"
 
 interface IUiLayout {
     children: React.ReactNode
@@ -16,6 +17,8 @@ interface IUiLayout {
 
 export default function UiLayout({ children }: Readonly<IUiLayout>) {
     return (
+        <Suspense>
+
         <main className="min-h-screen flex justify-center mx-auto max-w-7xl">
             <section className="hidden lg:flex flex-col sticky top-0 h-screen w-72 px-3 border-r-2 border-gray-900">
                 <div className="flex-1 mt-6">
@@ -48,5 +51,6 @@ export default function UiLayout({ children }: Readonly<IUiLayout>) {
                 <RecommendationArea />
             </aside>
         </main>
+        </Suspense>
     )
 }
