@@ -21,6 +21,8 @@ import {useToast} from "@/hooks/use-toast";
 import {ShowMessage} from "@/components/utils/Message";
 import {api} from "@/lib/api";
 import {TextArea} from "@/components/ui/TextArea";
+import {checkIfLoggedAndRedirect} from "@/utils/auth";
+import {useCheckLogin} from "@/hooks/useCheckLogin";
 
 
 const giveCorrectCoverImage = (coverImageUrl: string) => {
@@ -32,6 +34,8 @@ const giveCorrectCoverImage = (coverImageUrl: string) => {
 
 
 export default function EditProfile() {
+    useCheckLogin()
+
     const params = useParams()
     const {toast} = useToast()
     const router = useRouter()
@@ -48,7 +52,7 @@ export default function EditProfile() {
 
     useEffect(() => {
         if (getAuthData()?.user.slug != searchParams.get("slug"))
-            return console.log(searchParams.get("slug"))//router.push("/edit/ladrao")
+            return router.push("/edit/ladrao")
 
         setName(decodeURIComponent(String(searchParams.get("name"))))
         setLink(decodeURIComponent(String(searchParams.get("link"))))

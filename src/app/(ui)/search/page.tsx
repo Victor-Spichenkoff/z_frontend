@@ -10,9 +10,12 @@ import {api} from "@/lib/api";
 import {ShowMessage} from "@/components/utils/Message";
 import {useToast} from "@/hooks/use-toast";
 import {MyButton} from "@/components/ui/MyButton";
+import {useCheckLogin} from "@/hooks/useCheckLogin"
 
 
 export default function SearchPage() {
+    useCheckLogin()
+
     const searchParams = useSearchParams()
     const { toast } = useToast()
     const [tweets, setTweets] = useState<Tweet[] | null>()
