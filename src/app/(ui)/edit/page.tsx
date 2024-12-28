@@ -26,7 +26,7 @@ const giveCorrectCoverImage = (coverImageUrl: string) => {
 
 
 export default function EditPage() {
-    useCheckLogin()
+    // useCheckLogin()
 
     const params = useParams()
     const {toast} = useToast()
