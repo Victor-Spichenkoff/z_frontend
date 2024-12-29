@@ -32,7 +32,8 @@ export default function SearchPage() {
 
         (async ()=>{
             try {
-                const res = await api(`/search?q=${q}&page=${page}`,)
+                const encoded = encodeURIComponent(q)
+                const res = await api(`/search?q=${encoded}&page=${page}`,)
 
                 if(res.data.tweets.length)
                     setTweets(res.data.tweets)

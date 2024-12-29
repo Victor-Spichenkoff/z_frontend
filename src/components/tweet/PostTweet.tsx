@@ -13,7 +13,12 @@ import { api } from "@/lib/api"
 import { Sleep } from "../utils/sleep"
 
 
-export const TweetPost = () => {
+interface TweetPOstProps {
+    answerOf: string
+    setSuccessState?: (state: boolean) => void
+}
+
+export const TweetPost = ({ answerOf, setSuccessState }: TweetPOstProps) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null)
     const router = useRouter()
     const { toast } = useToast()
@@ -74,11 +79,17 @@ export const TweetPost = () => {
         if (image)
             formData.append("image", image)
 
+        if(answerOf)
+            formData.append("answer", answerOf)
+
         startTransition(async ()=> { 
             try {
                 const res = await api.post("tweet", formData)
 
                 ShowMessage(toast, "Criado...", true)
+                // para atualizar a página ao criar
+                if(setSuccessState)
+                    setSuccessState(true)
 
                 setImage(null)
                 setTweetBody("")

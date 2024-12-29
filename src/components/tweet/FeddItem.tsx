@@ -11,9 +11,10 @@ import { useEffect, useState } from "react"
 
 interface FeedItemProps {
   tweet: Tweet
+  hideComments?: boolean
 }
 
-export const FeedItem = ({ tweet }: FeedItemProps) => {
+export const FeedItem = ({ tweet, hideComments }: FeedItemProps) => {
   const [isLiked, setIsLiked] = useState(false)
   const [likesCount, setLikesCount] = useState(tweet.likes?.length)
 
@@ -78,14 +79,18 @@ export const FeedItem = ({ tweet }: FeedItemProps) => {
         )}
         <div className="flex mt-6 text-gray-500">
 
-          <div className="flex-1">
-            <Link href={`/tweet/${tweet.id}`}>
-              <div className="inline-flex items-center gap-2 cursor-pointer">
-                <FontAwesomeIcon icon={faComment} className="size-6" />
-                <div>{tweet.commentCount}</div>
-              </div>
-            </Link>
-          </div>
+
+            {!hideComments && (
+                <div className="flex-1">
+                  <Link href={`/tweet/${tweet.id}`}>
+                    <div className="inline-flex items-center gap-2 cursor-pointer">
+                      <FontAwesomeIcon icon={faComment} className="size-6" />
+                      <div>{tweet.commentCount}</div>
+                    </div>
+                  </Link>
+                </div>
+            ) }
+
           <div className="flex-1">
             <div className="inline-flex items-center gap-2 cursor-pointer">
               <FontAwesomeIcon icon={faRetweet} className="size-6" />

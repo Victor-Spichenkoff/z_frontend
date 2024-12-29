@@ -1,8 +1,8 @@
 "use client"
 
 import {GeneralHeader} from "@/components/ui/generalHeader"
-import {useParams, useRouter, useSearchParams} from "next/navigation"
-import {Suspense, useEffect, useState, useTransition} from "react"
+import { useRouter, useSearchParams} from "next/navigation"
+import { useEffect, useState} from "react"
 import CoverImage from "@/assets/default_cover.jpg"
 import Image from "next/image"
 import {MyButton} from "@/components/ui/MyButton"
