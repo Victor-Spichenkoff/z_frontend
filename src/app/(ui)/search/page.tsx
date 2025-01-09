@@ -18,7 +18,7 @@ export default function SearchPage() {
 
     const searchParams = useSearchParams()
     const { toast } = useToast()
-    const [tweets, setTweets] = useState<Tweet[] | null>()
+    const [tweets, setTweets] = useState<Tweet[]>([])
     const [page, setPage] = useState(0)
     const [noMore, setNoMore] = useState<boolean>(false)
 
@@ -36,7 +36,7 @@ export default function SearchPage() {
                 const res = await api(`/search?q=${encoded}&page=${page}`,)
 
                 if(res.data.tweets.length)
-                    setTweets(res.data.tweets)
+                    setTweets(old => [...old, ...res.data.tweets])
                 else
                     setNoMore(true)
             } catch {
