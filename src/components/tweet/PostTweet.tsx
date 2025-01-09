@@ -10,11 +10,10 @@ import { useToast } from "@/hooks/use-toast"
 import { ShowMessage } from "../utils/Message"
 import { ImagePreview } from "../utils/ImagePreview"
 import { api } from "@/lib/api"
-import { Sleep } from "../utils/sleep"
 
 
 interface TweetPOstProps {
-    answerOf: string
+    answerOf?: string
     setSuccessState?: (state: boolean) => void
 }
 
